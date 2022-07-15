@@ -82,6 +82,15 @@ function registerValidSW(swUrl, config) {
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
 
+              registration.pushManager.subscribe({
+                userVisibleOnly : true,
+                applicationServerKey : ''
+              }).then((subscription) => {
+                const pwaSubscription = JSON.parse(JSON.stringify(subscription));
+                console.log(pwaSubscription)
+              }).catch((e)=> console.log(`subscribe error`, e));
+              Notification.requestPermission();
+
               // Execute callback
               if (config && config.onSuccess) {
                 config.onSuccess(registration);
